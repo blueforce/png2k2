@@ -12,6 +12,6 @@ This plugin was written from tthe guys arround joomlachamp.com. But it's no long
 
 The current Version 1.0.5 is not compatible with PHP 7.0
 
-##What is my goal for this Code Repo
+## What is my goal for this Code Repo
 
 So I search someone who can make this plugin running and compliant with PHP 7.x and K2 2.7.x
