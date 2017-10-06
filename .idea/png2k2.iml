@@ -4,53 +4,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP" type="php">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/composer" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/ircmaxell/password-compat" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/application" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/compat" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/di" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/event" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/filter" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/input" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/registry" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/session" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/string" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/uri" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/utilities" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/leafo/lessphp" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/paragonie/random_compat" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/phpmailer/phpmailer" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/psr/log" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/symfony/polyfill-php56" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/symfony/polyfill-util" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/symfony/yaml" />
-        </CLASSES>
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/composer" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/ircmaxell/password-compat" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/application" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/compat" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/di" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/event" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/filter" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/input" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/registry" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/session" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/string" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/uri" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/joomla/utilities" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/leafo/lessphp" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/paragonie/random_compat" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/phpmailer/phpmailer" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/psr/log" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/symfony/polyfill-php56" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/symfony/polyfill-util" />
-          <root url="file://$MODULE_DIR$/../joomla-cms/libraries/vendor/symfony/yaml" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>

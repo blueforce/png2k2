@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="k2" method="upgrade">
+    <name>PNG to K2</name>
+    <creationDate>2017-10-06</creationDate>
+    <author>Blueforce / Roger Perren (JoomlaChamp)</author>
+    <authorEmail>no@example.com</authorEmail>
+    <authorUrl>https://github.com/blueforce/png2k2</authorUrl>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <version>2.0.0</version>
+    <description>PLG_PNG2K2_MAIN_DESC</description>
+    <files>
+        <filename plugin="png2k2">LICENSE</filename>
+        <filename plugin="png2k2">png2k2.php</filename>
+        <filename plugin="png2k2">README.md</filename>
+        <folder>helpers</folder>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="png2k2_anisizes" type="text" label="PLG_PNG2K2_ANIMATED_LABEL" description="PLG_PNG2K2_ANIMATED_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
