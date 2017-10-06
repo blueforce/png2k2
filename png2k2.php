@@ -38,8 +38,8 @@ class PlgK2Png2K2 extends K2Plugin
 
 		if($_FILES['image'] && $_FILES['image']['error'] === 0)
 		{
-			$ext = end(explode('.', $_FILES['image']['name']));
-			$this->_new->ext = strtolower($ext);
+			$ext_array = explode('.', $_FILES['image']['name']);
+			$this->_new->ext = strtolower(array_values(array_slice($ext_array, -1))[0]);
 			$path_parts = pathinfo($_FILES['image']['tmp_name']);
 			if($this->_new->ext != 'jpg')
 			{
@@ -63,14 +63,17 @@ class PlgK2Png2K2 extends K2Plugin
 
 		JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_k2/tables');
 
-		if(file_exists(JPATH_ADMINISTRATOR.'/components/com_k2/lib/class.upload.php'))
+		if(!class_exists('upload'))
 		{
-			require_once JPATH_ADMINISTRATOR.'/components/com_k2/lib/class.upload.php';
-		}
+			if(file_exists(JPATH_ADMINISTRATOR.'/components/com_k2/lib/class.upload.php'))
+			{
+				require_once JPATH_ADMINISTRATOR.'/components/com_k2/lib/class.upload.php';
+			}
 
-		if(file_exists(JPATH_ROOT.'/media/k2/assets/vendors/verot/class.upload.php/src/class.upload.php'))
-		{
-			require_once JPATH_ROOT.'/media/k2/assets/vendors/verot/class.upload.php/src/class.upload.php';
+			if(file_exists(JPATH_ROOT.'/media/k2/assets/vendors/verot/class.upload.php/src/class.upload.php'))
+			{
+				require_once JPATH_ROOT.'/media/k2/assets/vendors/verot/class.upload.php/src/class.upload.php';
+			}
 		}
 
 		require_once JPATH_SITE.'/plugins/k2/png2k2/helpers/gifsplit.php';
@@ -84,8 +87,8 @@ class PlgK2Png2K2 extends K2Plugin
 		if(($files['image-clone']['error'] === 0 || $existingImage) && !JRequest::getBool('del_image'))
 		{
 			// lets get in an array all the cur images 
-			$oldSrc = glob(JPATH_SITE.'/media/k2/items/src/'.md5("Image".$item->id).'*');
-			$oldCache = glob(JPATH_SITE.'/media/k2/items/cache/'.md5("Image".$item->id).'_*');
+			$oldSrc = glob(JPATH_SITE.'/media/k2/items/src/'.md5('Image'.$item->id).'*');
+			$oldCache = glob(JPATH_SITE.'/media/k2/items/cache/'.md5('Image'.$item->id).'_*');
 			$oldImgs = array_merge((array)$oldSrc, (array)$oldCache);
 
 			if(count($oldImgs))
@@ -124,7 +127,7 @@ class PlgK2Png2K2 extends K2Plugin
 				if($cparams->get('inheritFrom'))
 				{
 					$masterCategoryID = $cparams->get('inheritFrom');
-					$query = "SELECT * FROM #__k2_categories WHERE id=".(int)$masterCategoryID;
+					$query = 'SELECT * FROM #__k2_categories WHERE id='.(int)$masterCategoryID;
 					$db->setQuery($query, 0, 1);
 					$masterCategory = $db->loadObject();
 					$cparams = class_exists('JParameter') ? new JParameter($masterCategory->params) : new JRegistry($masterCategory->params);
@@ -137,11 +140,11 @@ class PlgK2Png2K2 extends K2Plugin
 				$handle->jpeg_quality = 100;
 				$handle->file_auto_rename = false;
 				$handle->file_overwrite = true;
-				$handle->file_new_name_body = md5("Image".$item->id);
+				$handle->file_new_name_body = md5('Image'.$item->id);
 				$handle->process($savepath);
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for Source image";
+					$errors[] = 'Error for Source image';
 				}
 				else
 				{
@@ -178,7 +181,7 @@ class PlgK2Png2K2 extends K2Plugin
 
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for XL image";
+					$errors[] = 'Error for XL image';
 				}
 				else
 				{
@@ -207,7 +210,7 @@ class PlgK2Png2K2 extends K2Plugin
 
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for L image";
+					$errors[] = 'Error for L image';
 				}
 				else
 				{
@@ -236,7 +239,7 @@ class PlgK2Png2K2 extends K2Plugin
 
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for M image";
+					$errors[] = 'Error for M image';
 				}
 				else
 				{
@@ -265,7 +268,7 @@ class PlgK2Png2K2 extends K2Plugin
 
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for S image";
+					$errors[] = 'Error for S image';
 				}
 				else
 				{
@@ -294,7 +297,7 @@ class PlgK2Png2K2 extends K2Plugin
 
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for XS image";
+					$errors[] = 'Error for XS image';
 				}
 				else
 				{
@@ -314,7 +317,7 @@ class PlgK2Png2K2 extends K2Plugin
 
 				if(!$handle->processed)
 				{
-					$errors[] = "Error for Generic image";
+					$errors[] = 'Error for Generic image';
 				}
 				else
 				{
@@ -328,8 +331,8 @@ class PlgK2Png2K2 extends K2Plugin
 
 				// lets check what sizes will resize the animated gif
 				$aniSizes = $this->params->get('png2k2_anisizes', '');
-				$aniSizes = explode(",", $aniSizes);
-				$acSizes = array("XL", "L", "M", "S", "XS", "Generic");
+				$aniSizes = explode(',', $aniSizes);
+				$acSizes = array('XL', 'L', 'M', 'S', 'XS', 'Generic');
 				$resAniSizes = array_intersect($acSizes, $aniSizes);
 
 				if(count($resAniSizes))
@@ -337,22 +340,22 @@ class PlgK2Png2K2 extends K2Plugin
 					$o = JPATH_SITE.'/media/k2/items/src/'.$filename.'.gif';
 					foreach($resAniSizes as $aniSize)
 					{
-						$this->_scaleImageFile($o, $params->get('itemImage'.$aniSize), 0, $savepath.'/'.$filename."_".$aniSize.".gif", 4);
+						$this->_scaleImageFile($o, $params->get('itemImage'.$aniSize), 0, $savepath.'/'.$filename.'_'.$aniSize.'.gif', 4);
 					}
 				}
 			}
 		}
 
-		if(($_FILES["image"] && $_FILES["image"]["error"] === 0 && $this->_new->ext == "jpg") || JRequest::getBool('del_image'))
+		if(($_FILES['image'] && $_FILES['image']['error'] === 0 && $this->_new->ext == 'jpg') || JRequest::getBool('del_image'))
 		{
-			$extensions = array("gif", "jpeg", "png");
+			$extensions = array('gif', 'jpeg', 'png');
 			if(JRequest::getBool('del_image'))
 			{
-				$extensions[] = "jpg";
+				$extensions[] = 'jpg';
 			}
 
-			$oldSrc = glob(JPATH_SITE.'/media/k2/items/src/'.md5("Image".$item->id).'*.{'.implode(',', $extensions).'}', GLOB_BRACE);
-			$oldCache = glob(JPATH_SITE.'/media/k2/items/cache/'.md5("Image".$item->id).'*.{'.implode(',', $extensions).'}', GLOB_BRACE);
+			$oldSrc = glob(JPATH_SITE.'/media/k2/items/src/'.md5('Image'.$item->id).'*.{'.implode(',', $extensions).'}', GLOB_BRACE);
+			$oldCache = glob(JPATH_SITE.'/media/k2/items/cache/'.md5('Image'.$item->id).'*.{'.implode(',', $extensions).'}', GLOB_BRACE);
 			$oldImages = array_merge((array)$oldSrc, (array)$oldCache);
 
 			if(count($oldImages))
@@ -382,16 +385,16 @@ class PlgK2Png2K2 extends K2Plugin
 
 		// image array
 		$imgs = array();
-		$imgs["_XS"] = "imageXSmall";
-		$imgs["_S"] = "imageSmall";
-		$imgs["_M"] = "imageMedium";
-		$imgs["_L"] = "imageLarge";
-		$imgs["_XL"] = "imageXLarge";
-		$imgs["_Generic"] = "imageGeneric";
+		$imgs['_XS'] = 'imageXSmall';
+		$imgs['_S'] = 'imageSmall';
+		$imgs['_M'] = 'imageMedium';
+		$imgs['_L'] = 'imageLarge';
+		$imgs['_XL'] = 'imageXLarge';
+		$imgs['_Generic'] = 'imageGeneric';
 
 		$date = JFactory::getDate($item->modified);
 		$timestamp = '?t='.$date->toUnix();
-		$md5 = md5("Image".$item->id);
+		$md5 = md5('Image'.$item->id);
 
 		$resultImages = glob(JPATH_SITE.'/media/k2/items/cache/'.$md5.'_*');
 
@@ -430,30 +433,30 @@ class PlgK2Png2K2 extends K2Plugin
 
 	public function onRenderAdminForm(&$item, $type, $tab = '')
 	{
-		if($type == "item")
+		if($type == 'item')
 		{
 			$date = JFactory::getDate($item->modified);
 			$timestamp = '?t='.$date->toUnix();
 
-			$resultLarge = glob(JPATH_SITE.'/media/k2/items/cache/'.md5("Image".$item->id).'_L*.{gif,jpg,jpeg,png}', GLOB_BRACE);
+			$resultLarge = glob(JPATH_SITE.'/media/k2/items/cache/'.md5('Image'.$item->id).'_L*.{gif,jpg,jpeg,png}', GLOB_BRACE);
 
 			if(count($resultLarge))
 			{
 				foreach($resultLarge as $large)
 				{
 					$info = pathinfo($large);
-					$item->image = JURI::root().'media/k2/items/cache/'.md5("Image".$item->id).'_L.'.$info['extension'].$timestamp;
+					$item->image = JURI::root().'media/k2/items/cache/'.md5('Image'.$item->id).'_L.'.$info['extension'].$timestamp;
 				}
 			}
 
-			$resultSmall = glob(JPATH_SITE.'/media/k2/items/cache/'.md5("Image".$item->id).'_S*.{gif,jpg,jpeg,png}', GLOB_BRACE);
+			$resultSmall = glob(JPATH_SITE.'/media/k2/items/cache/'.md5('Image'.$item->id).'_S*.{gif,jpg,jpeg,png}', GLOB_BRACE);
 
 			if(count($resultSmall))
 			{
 				foreach($resultSmall as $small)
 				{
 					$info = pathinfo($small);
-					$item->thumb = JURI::root().'media/k2/items/cache/'.md5("Image".$item->id).'_S.'.$info['extension'].$timestamp;
+					$item->thumb = JURI::root().'media/k2/items/cache/'.md5('Image'.$item->id).'_S.'.$info['extension'].$timestamp;
 				}
 			}
 		}
@@ -589,8 +592,8 @@ class PlgK2Png2K2 extends K2Plugin
 						array_push($newa, $gifdata);
 					}
 
-					$gifmerge = new GIFEncoder    ($newa, $delays, 999, 2, 0, 0, 0, "bin");
-					fwrite(fopen($saveTo, "wb"), $gifmerge->GetAnimation());
+					$gifmerge = new GIFEncoder    ($newa, $delays, 999, 2, 0, 0, 0, 'bin');
+					fwrite(fopen($saveTo, 'wb'), $gifmerge->GetAnimation());
 				}
 				else
 				{
